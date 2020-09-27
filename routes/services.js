@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const Branch = require('../models/Branch')
 
 // service list page 
 router.get('/', (req, res) => {
@@ -28,7 +29,27 @@ router.get('/propertyInformation', (req, res) => {
 
 // service: registry branch page
 router.get('/branchRegister', (req, res) => {
-    res.render('services/branchRegister') 
+    res.render('services/branchRegister', { branch: new Branch() }) 
+})
+
+// Create Branch
+router.post('/', async (req, res) => {
+    const branch = new Branch({
+        Branch_ID: req.body.Branch_ID,
+        LName_Manager: req.body.LName_Manager,
+        FName_Manager: req.body.FName_Manager,
+        BranchName: req.body.BranchName,
+        Address: req.body.Address
+    })
+    try {
+        const newbranch = await branch.save()
+        res.redirect('/services')
+    } catch {
+        res.render('services/branchRegister', {
+            branch: branch,
+            errorMessage:  'Error creating Branch'
+        })
+    } 
 })
 
 module.exports = router
