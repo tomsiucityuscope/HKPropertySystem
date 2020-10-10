@@ -84,14 +84,21 @@ router.post('/register', NotAuthenticated, (req, res) => {
 })
 
 // Login
-router.post('/login', NotAuthenticated, (req, res, next) => {
+router.post('/login', NotAuthenticated, function(req, res, next) {
     console.log('Start to Login ...')
-    console.log(req.body)
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/user/login',
         failureFlash: true
     })(req, res, next)
+})
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(null);
+    res.clearCookie(this.cookie, { path: '/' });
+    req.logout();
+    console.log(req.session)
+    res.redirect('/user/login')
 })
 
 module.exports = router

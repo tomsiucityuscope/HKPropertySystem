@@ -9,7 +9,7 @@ const app = express()
 const expressLayouts = require('express-ejs-layouts')
 const bodyParser = require('body-parser')
 const passport = require('passport')
-const flash = require('express-flash')
+const flash = require('connect-flash')
 const session = require('express-session')
 
 // Import Router
@@ -41,6 +41,20 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose by user'))
 
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash())
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: true,
+    resave: true
+}))
+
+// Passport Config
+const passportConfig = require('./config/passport')
+passportConfig(passport)
+
 // Router
 app.use('/', homeRouter)
 app.use('/user', userloginRouter)
@@ -48,19 +62,5 @@ app.use('/services', servicesRouter)
 app.use('/customer', customerRouter)
 app.use('/agent', agentRouter)
 app.use('/branch', branchRouter)
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash())
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}))
-
-// Passport Config
-const passportConfig = require('./config/passport')
-passportConfig(passport)
 
 app.listen(process.env.PORT || 3000)

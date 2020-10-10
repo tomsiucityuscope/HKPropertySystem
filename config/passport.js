@@ -6,32 +6,43 @@ const UserProfile = require('../models/UserProfile')
 
 function initialize (passport) {
     console.log('Initialize passport')
-    passport.use(new LocalStrategy(
-        function(User_ID, Password, done) {
-            UserProfile.findOne({ User_ID: User_ID }, function(err, userProfile) {
-                if (err) {
-                    console.error('Error for Query')
-                    return done(err)
-                }
+    passport.use(new LocalStrategy({ usernameField: 'User_ID', passwordField: 'Password'},
+        function(username, password, done) {
+            UserProfile.findOne({ User_ID: username })
+            .then(userProfile => {
                 if (!userProfile) {
                     console.error('User ID is not registed')
                     return done(null, false, { message: 'User ID is not registed' })
                 }
-                if (!bcrypt.compare(Password, userProfile.Password)) {
-                    console.error('Password incorrect')
-                    return done(null, false, { message: 'Password incorrect' })
+                try {
+                    bcrypt.compare(password , userProfile.Password, (err, isMatch) => {
+                        if (err) throw err
+                        if (isMatch) {
+                            console.log('Password correct, Passed passport')
+                            return done(null, userProfile)
+                        } else {
+                            console.error('Password incorrect')
+                            return done(null, false, { message: 'Password incorrect' })
+                        }
+                    })
+                } catch (err) {
+                    return done(err)
                 }
-                console.log('Passed passport')
-                return done(null, userProfile)
             })
         }
     ))
-    passport.serializeUser(function(userProfile, done) { done(null, userProfile.id) })
-    passport.deserializeUser(function(id, done) {
-        UserProfile.findById(id, function(err, userProfile) {
-            done(err, userProfile)
-        })
+    passport.serializeUser(function(userProfile, done) { done(null, userProfile) })
+    passport.deserializeUser(async function(userProfile, done) {
+        const user = await UserProfile.findById(userProfile.id)
+        done(null, user)
     })
+
+    //passport.serializeUser(function(userProfile, done) { done(null, userProfile) })
+    //passport.deserializeUser(function(userProfile, done) {
+    //    UserProfile.findById(userProfile.id, function(err, userProfile) {
+    //        done(err, userProfile)
+    //    })
+    //})
 }
 
 module.exports = initialize

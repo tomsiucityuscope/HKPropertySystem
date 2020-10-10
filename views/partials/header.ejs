@@ -1,15 +1,15 @@
 <header>
-    <% if (locals.User_ID == null ) { %>
+    <% if (locals.login_User_ID == null ) { %>
         <%- include('../headers/withoutLogin.ejs') %>
-    <% } else if (locals.UserType == 'Admin') { %>
+    <% } else if (locals.login_User_ID == 'Admin') { %>
         <%- include('../headers/loginByAdmin.ejs') %>
-    <% } else if (locals.UserType == 'Agent') { %>
+    <% } else if (locals.login_User_ID == 'Agent') { %>
         <%- include('../headers/loginByAgent.ejs') %>
-    <% } else if (locals.UserType == 'BranchManager') { %>
+    <% } else if (locals.login_User_ID == 'BranchManager') { %>
         <%- include('../headers/loginByBranchManager.ejs') %>
-    <% } else if (locals.UserType == 'Customer') { %>
+    <% } else if (locals.login_User_ID == 'Customer') { %>
         <%- include('../headers/loginByCustomer.ejs') %>
-    <% } else if (locals.UserType == 'Owner') { %>
+    <% } else if (locals.login_User_ID == 'Owner') { %>
         <%- include('../headers/loginByOwner.ejs') %>
     <% } %>
 </header>
