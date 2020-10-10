@@ -36,13 +36,6 @@ function initialize (passport) {
         const user = await UserProfile.findById(userProfile.id)
         done(null, user)
     })
-
-    //passport.serializeUser(function(userProfile, done) { done(null, userProfile) })
-    //passport.deserializeUser(function(userProfile, done) {
-    //    UserProfile.findById(userProfile.id, function(err, userProfile) {
-    //        done(err, userProfile)
-    //    })
-    //})
 }
 
 module.exports = initialize

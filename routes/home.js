@@ -3,7 +3,6 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
     console.log('Go to Home Page')
-    console.log(req.session)
     if (req.session.passport == null ) {
         console.log(req.session.passport)
         res.render('home', { login_User_ID: req.session.passport })
