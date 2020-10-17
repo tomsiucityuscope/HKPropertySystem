@@ -14,5 +14,14 @@ module.exports = {
         }
         console.log('Cannot pass - Is Authenticated')
         res.redirect('/');
+    },
+    UserType: function(req, res) {
+        if (!req.session.passport) {
+            console.log('No login')
+            return null
+        } else {
+            console.log('Login by ' + req.session.passport.user.User_Type)
+            return req.session.passport.user.User_Type
+        }
     }
 }
