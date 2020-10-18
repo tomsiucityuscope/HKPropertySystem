@@ -1,55 +1,67 @@
 const express = require('express')
 const router = express.Router()
+
+// load models
+const Agent = require('../models/Agent')
 const Branch = require('../models/Branch')
+const Customer = require('../models/Customer')
+const Property = require('../models/Property')
+const Owner = require('../models/Property_Owner')
+const Transaction = require('../models/Transaction')
+const UserProfile = require('../models/UserProfile')
 
-// service list page 
-router.get('/', (req, res) => {
-    res.render('services/index') 
+// Selling Property Page - Normal User & Customer
+router.get('/sellingProperty', async (req, res) => {
+    console.log('Go to Selling Property Page')
+    res.render('services/sellingPage')
 })
 
-// service: selling property page
-router.get('/sellingProperty', (req, res) => {
-    res.render('services/sellingPage') 
+// Renting Property Page - Normal User & Customer
+router.get('/rentingProperty', async (req, res) => {
+    console.log('Go to Renting Property Page')
+    res.render('services/rentingPage')
 })
 
-// service: renting property page
-router.get('/rentingProperty', (req, res) => {
-    res.render('services/rentingPage') 
+// Property Page (View) - Normal User & Admin & Agent & Branch & Customer
+router.get('/searchProperty', async (req, res) => {
+    console.log('Go to View Property Page')
+    res.render('services/propertyInfo')
 })
 
-// service: agent list page
-router.get('/agentList', (req, res) => {
-    res.render('services/agentList') 
+// Transaction (View) - Admin & Agent & Branch & Customer & Owner
+router.get('/searchTransaction', async (req, res) => {
+    console.log('Go to View Transaction Page')
+    res.render('services/transactionInfo')
 })
 
-// service: property information page
-router.get('/propertyInformation', (req, res) => {
-    res.render('services/propertyInfo') 
+// Owner Property - Owner
+router.get('/ownerProperty', async (req, res) => {
+    console.log('Go to Owner Property Page')
+    res.render('services/ownerProperty')
 })
 
-// service: registry branch page
-router.get('/branchRegister', (req, res) => {
-    res.render('services/branchRegister', { branch: new Branch() }) 
+// Agent (View) - Normal User & Admin & Branch & Customer & Owner
+router.get('/searchAgent', async (req, res) => {
+    console.log('Go to View Agent Page')
+    res.render('services/agentInfo')
 })
 
-// Create Branch
-router.post('/', async (req, res) => {
-    const branch = new Branch({
-        Branch_ID: req.body.Branch_ID,
-        LName_Manager: req.body.LName_Manager,
-        FName_Manager: req.body.FName_Manager,
-        BranchName: req.body.BranchName,
-        Address: req.body.Address
-    })
-    try {
-        const newbranch = await branch.save()
-        res.redirect('/services')
-    } catch {
-        res.render('services/branchRegister', {
-            branch: branch,
-            errorMessage:  'Error creating Branch'
-        })
-    } 
+// Customer (View) - Admin & Agent & Branch
+router.get('searchCustomer', async (req, res) => {
+    console.log('Go to View Customer Page')
+    res.render('services/customerInfo')
+})
+
+// Owner (View) - Admin & Agent & Branch
+router.get('/searchOwner', async (req, res) => {
+    console.log('Go to View Owner Page')
+    res.render('services/ownerInfo')
+})
+
+// Branch (View) - Admin
+router.get('/serachBranch', async (req, res) => {
+    console.log('Go to View Branch Page')
+    res.render('services/branchInfo')
 })
 
 module.exports = router

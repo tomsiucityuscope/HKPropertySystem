@@ -4,19 +4,19 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const { NotAuthenticated } = require('../config/auth');
 
-// Load User model
+// Load model
 const UserProfile = require('../models/UserProfile')
 
 // Register Page
 router.get('/register', NotAuthenticated,  (req, res) => {
     console.log('Go to Register Page')
-    res.render('register')
+    res.render('loginSystem/register')
 })
 
 // Login Page
 router.get('/login', NotAuthenticated, (req, res) => {
     console.log('Go to Login Page')
-    res.render('login')
+    res.render('loginSystem/login')
 })
 
 // Register
@@ -42,7 +42,7 @@ router.post('/register', NotAuthenticated, (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render('register', {
+        res.render('loginSystem/register', {
             errors,
             User_ID,
             Password,
@@ -53,7 +53,7 @@ router.post('/register', NotAuthenticated, (req, res) => {
         if (user) {
             console.error('User already exists')
             errors.push({ msg: 'User already exists' })
-            res.render('register', {
+            res.render('loginSystem/register', {
                 errors,
                 User_ID,
                 Password,
