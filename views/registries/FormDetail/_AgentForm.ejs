@@ -1,0 +1,39 @@
+<table style="margin-left: auto; margin-right: auto;">
+    <tr>
+        <th><label>Agent ID</label></th>
+        <td><input type="text" name="Agent_ID" placeholder="Agent ID" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Last Name</label></th>
+        <td><input type="text" name="LName_Agent" placeholder="Agent Last Name" value=""></td>
+    </tr>
+    <tr>
+        <th><label>First Name</label></th>
+        <td><input type="text" name="FName_Agent" placeholder="Agent First Name" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Contact No.</label></th>
+        <td><input type="text" name="Phone_Agent" placeholder="Agent Contact Number" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Under Branch</label></th>
+        <td>
+            <select name="Branch_ID">
+                <option label="--- Select Branch---" value="">
+                <% if (branchlist) { %> 
+                    <% branchlist.forEach(branch => { %>
+                        <option label="<%= branch.BranchName %>" value="<%= branch.Branch_ID %>">
+                    <% }) %>
+                <% } %> 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label>Password</label></th>
+        <td><input type="password" name="Password" placeholder="Enter Password" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Comfirm Password</label></th>
+        <td><input type="password" name="Password2" placeholder="Comfirm Password" value=""></td>
+    </tr>
+</table>

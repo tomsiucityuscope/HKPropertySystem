@@ -1,0 +1,67 @@
+<table style="margin-left: auto; margin-right: auto;">
+    <tr>
+        <th><label>Property ID</label></th>
+        <td><input type="text" name="Property_ID" placeholder="Property ID" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Belong to</label></th>
+        <td>
+            <select name="Owner_ID">
+                <option label="--- Select Property Owner by Owner ID ---" value="">
+                <% if (ownerlist) { %> 
+                    <% ownerlist.forEach(owner => { %>
+                        <option label="<%= owner.Owner_ID %> - <%= owner.LName_Owner %> <%= owner.FName_Owner %>" value="<%= owner.Owner_ID %>">
+                    <% }) %>
+                <% } %> 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label>District</label></th>
+        <td><input type="text" name="District" placeholder="District" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Estate</label></th>
+        <td><input type="text" name="Estate" placeholder="Estate" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Block Number</label></th>
+        <td><input type="number" name="Block_Num" placeholder="Block Number" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Floor Number</label></th>
+        <td><input type="number" name="Floor_Num" placeholder="floor Number" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Flat Number</label></th>
+        <td><input type="number" name="Flat_Num" placeholder="Flat Number" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Gross Floor Area</label></th>
+        <td><input type="number" name="GrossFloorArea" placeholder="Gross Floor Area" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Number of Bedroom</label></th>
+        <td><input type="number" name="NumOfBedroom" placeholder="Number of Bedroom" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Selling Price</label></th>
+        <td><input type="number" name="Selling_Price" placeholder="Selling Price" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Rental Price</label></th>
+        <td><input type="number" name="Rental_Price" placeholder="Rental Price" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Car Park Provided</label></th>
+        <td>
+            <input type="radio" name="CarPark_Provided" value="true">Yes</input>
+            <input type="radio" name="CarPark_Provided" value="false" checked>No</input>
+        </td>
+    </tr>
+</table>
+<script>
+function getChecked(){
+    document.getElementByName('CarPark_Provided').value = this.value
+}
+</script>

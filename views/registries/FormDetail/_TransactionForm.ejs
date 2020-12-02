@@ -1,0 +1,76 @@
+<table style="margin-left: auto; margin-right: auto;">
+    <tr>
+        <th><label>Transaction Reference No.</label></th>
+        <td><input type="text" name="Transaction_Ref" placeholder="Transaction Ref" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Transaction Type</label></th>
+        <td>
+            <select name="Transaction_Type">
+                <option label="--- Select Transaction Type ---" value=""></option>
+                <option label="Buying" value="buying"></option>
+                <option label="Rantal" value="rantal"></option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label>Transaction Price</label></th>
+        <td><input type="number" name="Transaction_Price" placeholder="Transaction Price" value=""></td>
+    </tr>
+    <tr>
+        <th><label>Transaction Date</label></th>
+        <td><input type="date" name="Transaction_Date"></td>
+    </tr>
+    <tr>
+        <th><label>Property ID</label>
+        <td>
+            <select name="Property_ID">
+                <option label="--- Select Property ID ---" value=""></option>
+                <% if (propertylist) { %> 
+                    <% propertylist.forEach(property => { %>
+                        <option label="<%= property.Property_ID %>" value="<%= property.Property_ID %>">
+                    <% }) %>
+                <% } %> 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label>Property Owner</label></th>
+        <td>
+            <select name="Owner_ID">
+                <option label="--- Select Property Owner by Owner ID---" value="">
+                <% if (ownerlist) { %> 
+                    <% ownerlist.forEach(owner => { %>
+                        <option label="<%= owner.Owner_ID %> - <%= owner.LName_Owner %> <%= owner.FName_Owner %>" value="<%= owner.Owner_ID %>">
+                    <% }) %>
+                <% } %> 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label>Customer</label>
+        <td>
+            <select name="Customer_ID">
+                <option label="--- Select Customer by Customer ID ---" value="">
+                <% if (customerlist) { %> 
+                    <% customerlist.forEach(customer => { %>
+                        <option label="<%= customer.Customer_ID %> - <%= customer.LName_Customer %> <%= customer.FName_Customer %>" value="<%= customer.Customer_ID %>">
+                    <% }) %>
+                <% } %> 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label>Be responsible for Agent</label></th>
+        <td>
+            <select name="Agent_ID">
+                <option label="--- Select Agent by Agent ID---" value="">
+                <% if (agentlist) { %>
+                    <% agentlist.forEach(agent => { %>
+                        <option label="<%= agent.Agent_ID %> - <%= agent.LName_Agent %> <%= agent.FName_Agent %>" value="<%= agent.Agent_ID %>">
+                    <% }) %>
+                <% } %> 
+            </select>
+        </td>
+    </tr>
+</table>

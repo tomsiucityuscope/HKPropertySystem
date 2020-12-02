@@ -6,15 +6,15 @@ const property_ownerSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    LName_Agent: {
+    LName_Owner: {
         type: String,
         require: true
     },
-    FName_Agent: {
+    FName_Owner: {
         type: String,
         require: true
     },
-    Phone_Agent: { 
+    Phone_Owner: { 
         type: String,
         require: true
     }

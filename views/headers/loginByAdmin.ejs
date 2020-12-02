@@ -1,52 +1,64 @@
-<button>
-    <a href="/user/logout">Log out</a>
-</button>
 
-<nav class="Tab_bar">
-    <button>
-        <a href="/">Home</a>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/"><b>Hong Kong Property - Administrator</b></a>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/services/sellingProperty"><b>Selling Property</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/"><b>Renting Property</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/"><b>Property Information</b></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/"><b>Agent</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/"><b>View List</b></a>
+                    <a class="dropdown-item" href="/registers/createAgent"><b>Create</b></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/"><b>Branch</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/"><b>View List</b></a>
+                    <a class="dropdown-item" href="/registers/createBranch"><b>Create</b></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/"><b>Customer</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/"><b>View List</b></a>
+                    <a class="dropdown-item" href="/registers/createCustomer"><b>Create</b></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/"><b>Owner</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/"><b>View List</b></a>
+                    <a class="dropdown-item" href="/registers/createOwner"><b>Create</b></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/"><b>Property</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/"><b>View List</b></a>
+                    <a class="dropdown-item" href="/registers/createProperty"><b>Create</b></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/"><b>Transaction</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/"><b>View List</b></a>
+                    <a class="dropdown-item" href="/"><b>Report</b></a>
+                    <a class="dropdown-item" href="/registers/createTransaction"><b>Create</b></a>
+                </div>
+            </li>
+        </ul>
 
-    <button>
-        <a href="/">Agent</a>
-    </button>
-    <ul>
-        <li><a href="/">View List</a></li>
-        <li><a href="/">Create</a></li>
-    </ul>
-    <button>
-        <a href="/">Branch</a>
-    </button>
-    <ul>
-        <li><a href="/">View List</a></li>
-        <li><a href="/">Create</a></li>
-    </ul>
-    <button>
-        <a href="/">Customer</a>
-    </button>
-    <ul>
-        <li><a href="/">View List</a></li>
-        <li><a href="/">Create</a></li>
-    </ul>
-    <button>
-        <a href="/">Owner</a>
-    </button>
-    <ul>
-        <li><a href="/">View List</a></li>
-        <li><a href="/">Create</a></li>
-    </ul>
-    <button>
-        <a href="/">Property</a>
-    </button>
-    <ul>
-        <li><a href="/">View List</a></li>
-        <li><a href="/">Report</a></li>
-    </ul>
-    <button>
-        <a href="/">Transaction</a>
-    </button>
-    <ul>
-        <li><a href="/">View List</a></li>
-        <li><a href="/">Report</a></li>
-    </ul>
+        <button class="btn btn-secondary">
+            <a href="/user/logout"><b class="text-muted">Log out</b></a>
+        </button>
+    </div>
 </nav>

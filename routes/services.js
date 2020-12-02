@@ -10,13 +10,13 @@ const Owner = require('../models/Property_Owner')
 const Transaction = require('../models/Transaction')
 const UserProfile = require('../models/UserProfile')
 
-// Selling Property Page - Normal User & Customer
+// Selling Property Page - Normal User & Customer & Admin
 router.get('/sellingProperty', async (req, res) => {
     console.log('Go to Selling Property Page')
     res.render('services/sellingPage')
 })
 
-// Renting Property Page - Normal User & Customer
+// Renting Property Page - Normal User & Customer & Admin
 router.get('/rentingProperty', async (req, res) => {
     console.log('Go to Renting Property Page')
     res.render('services/rentingPage')

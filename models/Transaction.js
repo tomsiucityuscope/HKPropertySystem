@@ -10,24 +10,16 @@ const transactionSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    Transaction_Price: {
+        type: Number,
+        require: true
+    },
     Transaction_Date: {
         type: Date,
         require: true
     },
-    Transaction_Status: { 
-        type: String,
-        require: true
-    },
     Property_ID: {
         type: String,
-        require: true
-    },
-    Sold_Price: {
-        type: Number,
-        require: true
-    },
-    Rental_Price: {
-        type: Number,
         require: true
     },
     Owner_ID: {

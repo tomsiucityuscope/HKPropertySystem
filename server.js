@@ -17,6 +17,7 @@ const userloginRouter = require('./routes/userlogin')
 const homeRouter = require('./routes/home')
 const servicesRouter = require('./routes/services')
 const registryRouter = require('./routes/registry')
+const reportRouter = require('./routes/report')
 
 // App default Setting
 app.set('view engine', 'ejs')
@@ -58,5 +59,6 @@ app.use('/', homeRouter)
 app.use('/user', userloginRouter)
 app.use('/services', servicesRouter)
 app.use('/registers', registryRouter)
+app.use('/reports', reportRouter)
 
 app.listen(process.env.PORT || 3000)
