@@ -26,14 +26,15 @@ router.get('/createProperty', async (req, res) => {
 
 router.post('/createProperty', async (req, res) => {
     console.log('Start to register Property ...')
-    const { Property_ID, District, Estate, Block_Num, Floor_Num, Flat_Num, GrossFloorArea, NumOfBedroom, CarPark_Provided, Selling_Price, Rental_Price, Owner_ID } = req.body
+    const { Property_ID, District, Estate, Block_Num, Floor_Num, GrossFloorArea, NumOfBedroom, CarPark_Provided, Selling_Price, Rental_Price, Owner_ID } = req.body
     const owners = await Owner.find({})
     let errors = []
 
     // Validation
-    if (!Property_ID || !District || !Estate || !Block_Num || !Floor_Num || !Flat_Num || !GrossFloorArea || !NumOfBedroom || !CarPark_Provided || !Selling_Price || !Rental_Price || !Owner_ID) {
+    if (!Property_ID || !District || !Estate || !Block_Num || !Floor_Num || !GrossFloorArea || !NumOfBedroom || !CarPark_Provided || !Selling_Price || !Rental_Price || !Owner_ID) {
         console.error('Please enter all fields')
         errors.push({ msg: 'Please enter all fields' })
+        console.log(errors)
         res.render('registries/propertyRegistry', { login_User_ID: UserType(req, res), errorMessage: errors, ownerlist: owners })
     } else {
         Property.findOne({ Property_ID: Property_ID }).then(property => {
@@ -49,7 +50,6 @@ router.post('/createProperty', async (req, res) => {
                     Estate: Estate,
                     Block_Num: Block_Num,
                     Floor_Num: Floor_Num,
-                    Flat_Num: Flat_Num,
                     GrossFloorArea: GrossFloorArea,
                     NumOfBedroom: NumOfBedroom,
                     CarPark_Provided: CarPark_Provided,

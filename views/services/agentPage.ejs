@@ -1,0 +1,19 @@
+<br><br>
+<h3 class="text-center">Agent Information</h3>
+<br>
+<table class="table table-hover" style="width: 90% !important; margin-left: auto !important; margin-right: auto !important;">
+    <tr class="table-info">
+        <th>Agent ID</th>
+        <th>Agent Name</th>
+        <th>Contact Number</th>
+        <th>Branch Name</th>
+    </tr>
+    <% agentList.forEach(agent => { %>
+        <tr class="table-light">
+            <td><%= agent.Agent_ID %></td>
+            <td><%= agent.AgentName %></td>
+            <td><%= agent.Phone_Agent %></td>
+            <td><%= agent.BranchName %></td>
+        </tr>
+    <% }) %>
+</table>

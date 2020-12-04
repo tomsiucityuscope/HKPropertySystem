@@ -1,0 +1,82 @@
+ 
+<br><br>
+<form action="/services/searchTransaction" method="POST">
+    <fieldset>
+        <h3 class="text-center">Transaction Information</h3>
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <th><label>Branch : </label></th>
+                <td>
+                    <select name="Branch_ID">
+                        <option label="-- Select Branch --" value="">
+                        <% if (branchlist) { %>
+                            <% branchlist.forEach(branch => { %>
+                                <% if (branch.Branch_ID == Branch_ID) { %>
+                                    <option selected label="<%= branch.BranchName%>" value="<%= branch.Branch_ID%>">
+                                <% } else { %>
+                                    <option label="<%= branch.BranchName%>" value="<%= branch.Branch_ID%>">
+                                <% } %>
+                            <% }) %>
+                        <% } %>
+                    </select>
+                </td>
+                <td></td>
+                <th><label>Transaction Type : </label></th>
+                <td>
+                    <select name="Transaction_Type">
+                        <% if (Transaction_Type == "buying") { %>
+                            <option label="--- Select Transaction Type ---" value=""></option>
+                            <option selected label="Buying" value="buying"></option>
+                            <option label="Rantal" value="rantal"></option>
+                        <% } else if (Transaction_Type == "rantal") { %>
+                            <option label="--- Select Transaction Type ---" value=""></option>
+                            <option label="Buying" value="buying"></option>
+                            <option selected label="Rantal" value="rantal"></option>
+                        <% } else { %>
+                            <option label="--- Select Transaction Type ---" value=""></option>
+                            <option label="Buying" value="buying"></option>
+                            <option label="Rantal" value="rantal"></option>
+                        <% } %>
+                    </select>
+                </td>
+                <td></td>
+                <td>
+                    <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+<br><br>
+<% if (transactionList.length > 0) { %>
+    <table class="table table-hover" style="width: 90% !important; margin-left: auto !important; margin-right: auto !important;">
+        <tr class="table-info">
+            <th>Transaction Reference Number</th>
+            <th>Transaction Type</th>
+            <th>Transaction Price</th>
+            <th>Transaction Date</th>
+            <th>Property ID</th>
+            <th>Owner ID</th>
+            <th>Customer ID</th>
+            <th>Agent ID</th>
+            <th>Commission</th>
+        </tr>
+        <% transactionList.forEach(transaction => { %>
+            <tr class="table-light">
+                <td><%= transaction.Transaction_Ref %></td>
+                <td><%= transaction.Transaction_Type %></td>
+                <td><%= transaction.Transaction_Price %></td>
+                <td><%= transaction.Transaction_Date %></td>
+                <td><%= transaction.Property_ID %></td>
+                <td><%= transaction.Owner_ID %></td>
+                <td><%= transaction.Customer_ID %></td>
+                <td><%= transaction.Agent_ID %></td>
+                <td><%= transaction.Commission %></td>
+            </tr>
+        <% }) %>
+    </table>
+<% } else if (Branch_ID != '' && Transaction_Type != '') { %>
+    <p class="text-center blockquote ">No Record Found, Please Select other options.</p>
+<% } else { %>
+    <p class="text-center blockquote ">- Please Select Branch and Transaction Type -</p>
+<% } %>

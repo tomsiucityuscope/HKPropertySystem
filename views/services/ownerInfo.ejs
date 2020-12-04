@@ -1,0 +1,99 @@
+<br><br>
+<form action="/services/searchOwner" method="POST">
+    <fieldset>
+        <h3 class="text-center">Property Owner Information</h3>
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <th><label>Property ID : </label></th>
+                <td>
+                    <select name="Property_ID">
+                        <option label="-- Select Property --" value="">
+                        <% if (propertylist) { %>
+                            <% propertylist.forEach(property => { %>
+                                <% if (property.Property_ID == Property_ID) { %>
+                                    <option selected label="<%= property.Property_ID%>" value="<%= property.Property_ID%>">
+                                <% } else { %>
+                                    <option label="<%= property.Property_ID%>" value="<%= property.Property_ID%>">
+                                <% } %>
+                            <% }) %>
+                        <% } %>
+                    </select>
+                </td>
+                <td></td>
+                <td>
+                    <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+<br><br>
+<% if (ownerInfo && propertyInfo) { %>
+    <table class="table" style="width: 50% !important; margin-left: auto !important; margin-right: auto !important; margin-bottom: 1% !important;">
+        <tr class="table-info">
+            <th colspan="2"><b>Property Owner</b></th>
+        </tr>
+        <tr class="table-active">
+            <th width="40%">Owner ID</th>
+            <td><%= ownerInfo.Owner_ID %></td>
+        </tr>
+        <tr class="table-active">
+            <th>Owner Name</th>
+            <td><%= ownerInfo.LName_Owner %> <%= ownerInfo.FName_Owner %></td>
+        </tr>
+        <tr class="table-active">
+            <th>Contact Number</th>
+            <td><%= ownerInfo.Phone_Owner %></td>
+        </tr>
+        <tr><th colspan="2"></th></tr>
+        <tr class="table-warning">
+            <th colspan="2"><b>Property Information</b></th>
+        </tr>
+        <tr class="table-active">
+            <th>Property ID</th>
+            <td><%= propertyInfo.Property_ID %></td>
+        </tr>
+        <tr class="table-active">
+            <th>District</th>
+            <td><%= propertyInfo.District%></td>
+        </tr>
+        <tr class="table-active">
+            <th>Estate</th>
+            <td><%= propertyInfo.Estate%></td>
+        </tr>
+        <tr class="table-active">
+            <th>Block Number</th>
+            <td><%= propertyInfo.Block_Num%></td>
+        </tr>
+        <tr class="table-active">
+            <th>Floor Number</th>
+            <td><%= propertyInfo.Floor_Num%></td>
+        </tr>
+        <tr class="table-active">
+            <th>Gross Floor Area (sq. feet)</th>
+            <td><%= propertyInfo.GrossFloorArea%></td>
+        </tr>
+        <tr class="table-active">
+            <th>Number of Bedroom</th>
+            <td><%= propertyInfo.NumOfBedroom%></td>
+        </tr>
+        <tr class="table-active">
+            <th>CarPark_Provided</th>
+            <% if (propertyInfo.CarPark_Provided) { %>
+                <td>Yes</td>
+            <% } else { %>
+                <td>No</td>
+            <% } %>
+        </tr>
+        <tr class="table-active">
+            <th>Selling Price</th>
+            <td><%= propertyInfo.Selling_Price%></td>
+        </tr>
+        <tr class="table-active">
+            <th>Rental Price</th>
+            <td><%= propertyInfo.Rental_Price%></td>
+        </tr>
+    </table>
+<% } else { %>
+    <p class="text-center blockquote ">- Please Select Property -</p>
+<% } %>

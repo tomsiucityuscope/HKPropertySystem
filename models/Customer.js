@@ -20,15 +20,19 @@ const customerSchema = new mongoose.Schema({
     },
     Perferred_District: {
         type: String,
+        require: true
     },
     Perferred_Estate: {
         type: String,
+        require: true
     },
     Buying_Budget: {
-        type: Number
+        type: Number,
+        require: true
     },
     Rental_Budget: {
-        type: Number
+        type: Number,
+        require: true
     }
 })
 

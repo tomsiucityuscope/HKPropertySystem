@@ -23,5 +23,12 @@ module.exports = {
             console.log('Login by ' + req.session.passport.user.User_Type)
             return req.session.passport.user.User_Type
         }
+    },
+    HiddenLog_UserType: function(req, res) {
+        if (!req.session.passport) {
+            return null
+        } else {
+            return req.session.passport.user.User_Type
+        }
     }
 }

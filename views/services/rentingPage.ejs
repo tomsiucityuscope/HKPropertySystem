@@ -1,1 +1,59 @@
-Renting Property
+<br><br>
+<form action="/services/rentingProperty" method="POST">
+    <fieldset>
+        <h3 class="text-center">Renting Property</h3>
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+                <th><label>Estate : </label></th>
+                <td>
+                    <select name="EstateName">
+                        <option label="-- Select Estate --" value="">
+                        <% if (estatelist) { %>
+                            <% estatelist.forEach(estate => { %>
+                                <% if (estate == EstateName) { %>
+                                    <option selected label="<%= estate%>" value="<%= estate%>">
+                                <% } else { %>
+                                    <option label="<%= estate%>" value="<%= estate%>">
+                                <% } %>
+                            <% }) %>
+                        <% } %>
+                    </select>
+                </td>
+                <td></td>
+                <td>
+                    <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+<table class="table table-hover" style="width: 90% !important; margin-left: auto !important; margin-right: auto !important;">
+    <tr class="table-info">
+        <th>Property ID</th>
+        <th>District</th>
+        <th>Estate</th>
+        <th>Block Number</th>
+        <th>Floor Number</th>
+        <th>Gross Floor Area (sq. feet)</th>
+        <th>Number of Bedroom</th>
+        <th>CarPark_Provided</th>
+        <th>Rental Price</th>
+    </tr>
+    <% rentingPropertylist.forEach(property => { %>
+        <tr class="table-light">
+            <td><%= property.Property_ID %></td>
+            <td><%= property.District%></td>
+            <td><%= property.Estate%></td>
+            <td><%= property.Block_Num%></td>
+            <td><%= property.Floor_Num%></td>
+            <td><%= property.GrossFloorArea%></td>
+            <td><%= property.NumOfBedroom%></td>
+            <% if (property.CarPark_Provided) { %>
+                <td>Yes</td>
+            <% } else { %>
+                <td>No</td>
+            <% } %>
+            <td><%= property.Rental_Price%></td>
+        </tr>
+    <% }) %>
+</table>

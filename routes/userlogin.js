@@ -99,7 +99,6 @@ router.get('/logout', (req, res) => {
     req.session.destroy(null);
     res.clearCookie(this.cookie, { path: '/' });
     req.logout();
-    console.log(req.session)
     res.redirect('/user/login')
 })
 
