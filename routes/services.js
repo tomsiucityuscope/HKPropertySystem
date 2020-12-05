@@ -154,7 +154,6 @@ router.post('/searchTransaction', accessAuth.CanViewPropertyPage, async (req, re
 })
 
 // Transaction Report Downloading - Admin & Branch
-
 router.post('/downloadReport',accessAuth.CanDownloadReport, async (req, res) => {
     console.log('Start to download report ...')
     const { Branch_ID, Transaction_Type } = req.body
