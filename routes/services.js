@@ -1,4 +1,6 @@
 const express = require('express')
+const objectstocsv = require('objects-to-csv')
+const fs = require('fs')
 const router = express.Router()
 
 // load models
@@ -148,6 +150,42 @@ router.post('/searchTransaction', accessAuth.CanViewPropertyPage, async (req, re
         Branch_ID: Branch_ID,
         Transaction_Type: Transaction_Type,
         transactionList: transactionList
+    })
+})
+
+// Transaction Report Downloading - Admin & Branch
+
+router.post('/downloadReport',accessAuth.CanDownloadReport, async (req, res) => {
+    console.log('Start to download report ...')
+    const { Branch_ID, Transaction_Type } = req.body
+    var transactionList = []
+    var allcollection = []
+    const agentlist = await Agent.find({Branch_ID: Branch_ID}).select('Agent_ID')
+    for (i = 0; i < agentlist.length; i++) {
+        var tempItem = await Transaction.find({Agent_ID: agentlist[i].Agent_ID}).where('Transaction_Type').equals(Transaction_Type)
+        if (tempItem.length > 0) {
+            allcollection.push(tempItem)
+        }
+    }
+    allcollection.forEach(byAgent => {
+        byAgent.forEach(transaction => {
+            var viewItem = {}
+            viewItem.Transaction_Ref = transaction.Transaction_Ref
+            viewItem.Transaction_Type = transaction.Transaction_Type
+            viewItem.Transaction_Price = transaction.Transaction_Price
+            viewItem.Transaction_Date = transaction.Transaction_Date
+            viewItem.Property_ID = transaction.Property_ID
+            viewItem.Owner_ID = transaction.Owner_ID
+            viewItem.Customer_ID = transaction.Customer_ID
+            viewItem.Agent_ID = transaction.Agent_ID
+            viewItem.Commission = transaction.Commission
+            transactionList.push(viewItem)
+        })
+    })
+    const csv = new objectstocsv(transactionList)
+    await csv.toDisk('./TransactionReport.csv')
+    return res.download("./TransactionReport.csv", () => {
+        fs.unlinkSync("./TransactionReport.csv")
     })
 })
 
